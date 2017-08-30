@@ -3,6 +3,7 @@
 
 import signal
 import subprocess
+import os
 import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
@@ -46,7 +47,8 @@ class AOCStopper():
 
     def menu_run(self, _):
         """Function to stop AGC"""
-        self.child = subprocess.Popen(['bash', './audio-fix.sh'])
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        self.child = subprocess.Popen(['bash', dir_path + '/./audio-fix.sh'])
         self.running = 1
         self.item_run.set_sensitive(False)
         self.item_stop.set_sensitive(True)
